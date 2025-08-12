@@ -5,11 +5,14 @@ import { VerMateriasComponent } from "./alumno/ver-materias/ver-materias.compone
 import { ListaAlumnosComponent } from "./admin/lista-alumnos/lista-alumnos.component";
 import { MateriasComponent } from "./admin/materias/materias.component";
 import { AsignarMateriasComponent } from "./admin/asignar-materias/asignar-materias.component";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, VerMateriasComponent, ListaAlumnosComponent, MateriasComponent, AsignarMateriasComponent],
+  imports: [RouterOutlet, LoginComponent, VerMateriasComponent, ListaAlumnosComponent, MateriasComponent, AsignarMateriasComponent, CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
