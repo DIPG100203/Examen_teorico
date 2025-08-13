@@ -8,13 +8,14 @@ import { AsignarMateriasComponent } from "./admin/asignar-materias/asignar-mater
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
+import { dashboardComponent } from "./admin/dashboard/dashboard.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, VerMateriasComponent, ListaAlumnosComponent, MateriasComponent, AsignarMateriasComponent, CommonModule, FormsModule],
+  imports: [RouterOutlet, LoginComponent, VerMateriasComponent, ListaAlumnosComponent, MateriasComponent, AsignarMateriasComponent, CommonModule, FormsModule, dashboardComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'EXAMEN_TEO';

@@ -1,3 +1,6 @@
+
+
+  
 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
    <span class="sr-only">Open sidebar</span>
    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -55,37 +58,69 @@
 
 <main class="flex-1 ml-64 p-6 overflow-auto">
 
-<div class="p-6 max-w-6xl mx-auto">
-  <h1 class="text-3xl font-bold text-blue-800 mb-6 text-center">Alumnos Registrados</h1>
+  <h1 class="text-2xl font-bold mb-4 text-center">Panel de Administración</h1>
 
-  <div class="overflow-x-auto rounded-lg shadow-md">
-    <table class="min-w-full text-left text-sm text-gray-700">
-      <thead class="bg-blue-100 text-gray-900">
+  <section class="mb-6">
+    <h2 class="text-xl font-semibold mb-2 text-center">Alumnos Registrados</h2>
+    <table class="w-full border border-collapse border-gray-300">
+      <thead>
         <tr>
-          <th scope="col" class="px-6 py-4 font-semibold">#</th>
-          <th scope="col" class="px-6 py-4 font-semibold">Nombre</th>
-          <th scope="col" class="px-6 py-4 font-semibold">Correo</th>
+          <th class="border border-gray-300 p-2">Nombre</th>
+          <th class="border border-gray-300 p-2">Email</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="border-b hover:bg-blue-50 transition" *ngFor="let alumno of alumnos">
-          <td class="px-6 py-4">{{ alumno.id }}</td>
-          <td class="px-6 py-4">{{ alumno.nombre }}</td>
-          <td class="px-6 py-4">{{ alumno.email }}</td>
+        <tr *ngFor="let alumno of alumnos">
+          <td class="border border-gray-300 p-2">{{ alumno.nombre }}</td>
+          <td class="border border-gray-300 p-2">{{ alumno.email }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 
-<!--- AQUI SERIA PARA AGREGAR MAS ALUMNOS -->
+  <section class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Registrar Nueva Materia</h2>
+    <input
+      [(ngModel)]="nuevaMateriaNombre"
+      type="text"
+      placeholder="Nombre de la materia"
+      class="border p-2 mb-2 w-full"
+    />
+    <button
+      (click)="registrarMateria()"
+      class="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Registrar
+    </button>
+  </section>
 
-<div class="mb-4">
-    <h2 class="text-xl font-semibold mb-2">Agregar Alumno</h2>
-    <input type="text" placeholder="Nombre" [(ngModel)]="nuevoAlumno.nombre" class="border p-2 mr-2" />
-    <input type="email" placeholder="Correo" [(ngModel)]="nuevoAlumno.email" class="border p-2 mr-2" />
-    <button (click)="agregarAlumno()" class="bg-blue-600 text-white px-4 py-2 rounded">Agregar</button>
-  </div>
+  <section>
+    <h2 class="text-xl font-semibold mb-2">Asignar Materias a Alumnos</h2>
+    <select
+      [(ngModel)]="alumnoSeleccionadoId"
+      class="border p-2 mb-2 w-full"
+    >
+      <option [ngValue]="null" disabled selected>Seleccione alumno</option>
+      <option *ngFor="let alumno of alumnos" [ngValue]="alumno.id">
+        {{ alumno.nombre }}
+      </option>
+    </select>
 
-</div>
+    <select
+      [(ngModel)]="materiaSeleccionadaId"
+      class="border p-2 mb-2 w-full"
+    >
+      <option [ngValue]="null" disabled selected>Seleccione materia</option>
+      <option *ngFor="let materia of materias" [ngValue]="materia.id">
+        {{ materia.nombre }}
+      </option>
+    </select>
 
+    <button
+      (click)="asignarMateria()"
+      class="bg-green-600 text-white px-4 py-2 rounded"
+    >
+      Asignar
+    </button>
+  </section>
 </main>
