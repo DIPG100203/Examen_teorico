@@ -1,15 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Router } from 'express';
+import { ServicioAsignarService, Alumno } from '../servicio-asignar.service';
 
 
-interface Alumno{
-  id: number;
-  nombre: string;
-  email: string;
-}
 
 @Component({
   selector: 'app-lista-alumnos',
@@ -20,19 +15,22 @@ interface Alumno{
 })
 export class ListaAlumnosComponent {
 
-  alumnos: Alumno[] = [
-    { id: 1, nombre: 'Juan', email: 'juan@example.com' },
-    { id: 2, nombre: 'Maria', email: 'maria@example.com' },
-    { id: 3, nombre: 'Pedro', email: 'pedro@example.com' }
-  ];
-
+  alumnos: Alumno[] = [];
   nuevoAlumno: Alumno = { id: 0, nombre: '', email: '' };
+
+  constructor(private servicio: ServicioAsignarService) {}
+
+  ngOnInit () {
+    this.servicio.alumnos$.subscribe(alumnos => {
+      this.alumnos = alumnos;
+    })
+  }
 
   agregarAlumno() {
     if (this.nuevoAlumno.nombre && this.nuevoAlumno.email) {
-      this.nuevoAlumno.id = this.alumnos.length + 1;
-      this.alumnos.push({ ...this.nuevoAlumno });
-      this.nuevoAlumno = { id: 0, nombre: '', email: '' };
+
+      this.servicio.agregarAlumnos({ ...this.nuevoAlumno, id: 0 });
+      this.nuevoAlumno = {id: 0, nombre: '', email: ''};
     }
   }
 

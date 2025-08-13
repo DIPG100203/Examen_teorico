@@ -61,7 +61,7 @@
     Asignar Materias a Alumnos
   </h2>
 
-  <form>
+  <form (ngSubmit)="asignarMateria()">
     <!-- Selección del alumno -->
     <div class="mb-5">
       <label for="alumno" class="block mb-2 text-sm font-medium text-gray-700">
@@ -69,12 +69,12 @@
       </label>
       <select
         id="alumno"
+        [(ngModel)]="alumnoID"
+        name="alumno"
         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option selected disabled>Selecciona un alumno</option>
-        <option value="1">Juan Pérez</option>
-        <option value="2">Ana López</option>
-        <option value="3">Carlos Gómez</option>
+        <option *ngFor="let alumno of alumnos" [value]="alumno.id">{{ alumno.nombre }}</option>
       </select>
     </div>
 
@@ -85,13 +85,12 @@
       </label>
       <select
         id="materias"
+        [(ngModel)]="materiaID"
+        name="materias"
         multiple
         class="w-full h-40 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <option value="mat101">Álgebra Lineal</option>
-        <option value="mat102">Cálculo Integral</option>
-        <option value="mat103">Programación I</option>
-        <option value="mat104">Bases de Datos</option>
+        <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
       </select>
       <p class="text-sm text-gray-500 mt-1">Mantén presionada Ctrl (o Cmd en Mac) para seleccionar varias.</p>
     </div>

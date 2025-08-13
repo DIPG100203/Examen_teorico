@@ -66,4 +66,11 @@ export class AuthService {
     this.usuarioActual = null;
     localStorage.removeItem('usuario');
   }
+
+  getUsuarioActual(): Usuario | null {
+  if (this.usuarioActual) return this.usuarioActual;
+  const u = localStorage.getItem('usuario');
+  if (u) this.usuarioActual = JSON.parse(u);
+  return this.usuarioActual;
+}
 }
